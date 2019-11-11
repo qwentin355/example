@@ -5,10 +5,13 @@ public class Gomoku {
     {
        
        int Player = 2;
-       int [][] board = new int [15][15];
+       
        Scanner userInput = new Scanner(System.in);
        System.out.println("[1]For PvP\n[2]For PvC\n[3]For Debug");
        int menuChoice = userInput.nextInt();
+       System.out.println("choose the size of board");
+       int size = userInput.nextInt();
+       int [][] board = new int [size][size];
        GameLoop(Player,board,userInput,menuChoice);
     }
     
@@ -69,9 +72,9 @@ public class Gomoku {
                }
                else
                {
-                  count=0;
+                  count=1;
                }
-               currentNumber=board[i][j];//updates the previously checked number
+               currentNumber=board[j][i];//updates the previously checked number
            }
        }
        return false;
@@ -96,7 +99,7 @@ public class Gomoku {
                }
                else
                {
-                  count=0;
+                  count=1;
                }
                currentNumber= board[i][j];
            }
@@ -105,26 +108,7 @@ public class Gomoku {
     }
     public static boolean DiagCheck(int[][]board)
     {
-       int count =0;
- 
-       for(int X=0;X<board.length;X++)
-       {
-           int currentNumber=board[X][0];
-           for(int Y =0,Ctemp=X;Ctemp>=0;Ctemp--,Y++)
-           {
-               if(currentNumber==board[X][Y] && currentNumber!=0)
-               {
-                  count++;
-                  if(count==5)
-                  {return true;}
-               }
-               else
-               {
-                  count=1;
-               }
-               currentNumber=board[X][Y];
-           }
-       }
+    	
        return false;//needs conditions
     }
     public static int[][] Update(int[][]board,int[] User,int Player)
@@ -143,13 +127,18 @@ public class Gomoku {
  
     public static void PrintBoard(int[][] board)
     {
+    	for(int i=0;board.length>i;i++)
+    	{
+    		System.out.print("   "+ i);
+    	}
+    	System.out.println();
        for(int i=0;board.length>i;i++)//prints the board
-       {
+       {System.out.print(i + "  ");
            for(int j=0;board[i].length>j;j++)
            {
-               System.out.print(board[i][j]+"  ");
+               System.out.print(board[i][j]+" | ");
            }
-           System.out.println();
+           System.out.println("\n    ---------------------------------------------------------");
        }
     }
     
